@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Info Bundesliga</title>
+  <meta name="description" content="Submission 2" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/materialize.min.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#ff6d00" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigasi -->
+  <nav class="orange darken-4" role="navigation">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo" id="logo-container">Detail Team</a>
+      <a href="javascript:history.go(-1)" class="sidenav-trigger" data-target="nav-mobile">
+        <i class="material-icons">arrow_back</i>
+      </a>
+      <ul class="topnav right hide-on-med-and-down"></ul>
+      <ul class="sidenav" id="nav-mobile"></ul>
+    </div>
+  </nav>
+  <!-- Akhir Navigasi -->
+  <div class="container" id="body-content"></div>
+  <script type="text/javascript" src="https://unpkg.com/snarkdown@1.0.2/dist/snarkdown.umd.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/idb.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/sw.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var urlParams = new URLSearchParams(window.location.search);
+      var id = Number(urlParams.get("id"));
+      var item = getTeamsId(id);
+
+      var save = document.getElementById("save");
+      save.onclick = function () {
+        console.log("Tombol FAB di klik.");
+        item.then(function (tim) {
+          insertTeam(tim);
+        })
+      }
+    });
+  </script>
+
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card">
+        <div class="card-image" id="teamHeader"></div>
+        <div class="card-content" id="teamBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large orange darken-4" id="save">
+      <i class="large material-icons">favorite</i>
+    </a>
+  </div>
+
+</body>
+
+</html>
